@@ -1,7 +1,9 @@
 package lk.ijse.helaOsuWedaGedara.entity;
 
-import jakarta.persistence.*;
-import lk.ijse.helaOsuWedaGedara.enumiration.UserRole;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,13 +12,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class User {
+public class AppointmentHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long userId;
-    private String userName;
-    private String password;
-    @Enumerated(EnumType.STRING)
-    private UserRole role;
+    private Long appHistoryId;
 
 }

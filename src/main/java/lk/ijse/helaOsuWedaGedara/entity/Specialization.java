@@ -1,5 +1,6 @@
 package lk.ijse.helaOsuWedaGedara.entity;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,20 +9,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Patient {
+public class Specialization {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long patientId;
-    private String name;
-    private LocalDate dob;
-    private String gender;
-    private String phoneNumber;
-    private String email;
-
+    private Long id;
+    private String specialization;
+    private String description;
 }

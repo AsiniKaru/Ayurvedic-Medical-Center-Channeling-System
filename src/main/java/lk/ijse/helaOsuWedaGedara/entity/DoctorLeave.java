@@ -14,14 +14,11 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Patient {
+public class DoctorLeave {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long patientId;
-    private String name;
-    private LocalDate dob;
-    private String gender;
-    private String phoneNumber;
-    private String email;
-
+    private Integer leaveId;
+    private LocalDate leaveStartDate;
+    private LocalDate workStartDate;
+    private Integer numOfLeaveDays;
 }
