@@ -1,6 +1,5 @@
 package lk.ijse.helaOsuWedaGedara.entity;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,13 +12,13 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Specialization {
+public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long specializationId;
-    private String specialization;
-    private String description;
+    private Long roomId;
+    private String roomNumber;
+    private String roomType;
 
-    @OneToMany(mappedBy = "specialization", fetch = FetchType.LAZY)
-    private List<Doctor> doctorList = new ArrayList<>();
+    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
+    private List<ClinicSession> clinicSessionList = new ArrayList<>();
 }

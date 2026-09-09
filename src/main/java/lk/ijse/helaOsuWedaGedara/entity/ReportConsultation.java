@@ -15,9 +15,15 @@ import java.time.LocalDateTime;
 public class ReportConsultation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long reportConId;
     private String doctorReply;
+    private LocalDateTime reviewedAt;
+
     @Enumerated(EnumType.STRING)
     private ReportStatus reportStatus;
-    private LocalDateTime repliedAt;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "report_id", nullable = false)
+    private MedicalReport report;
+
 }

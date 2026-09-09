@@ -1,9 +1,6 @@
 package lk.ijse.helaOsuWedaGedara.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,6 +19,9 @@ public class DocAvailability {
     private LocalDate availabilityDate;
     private LocalTime startTime;
     private LocalTime endTime;
-    private Integer  maxPatient;
     private Boolean isActive;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "doctor_id", nullable = false)
+    private Doctor doctor;
 }

@@ -1,35 +1,26 @@
 package lk.ijse.helaOsuWedaGedara.entity;
 
 import jakarta.persistence.*;
-import lk.ijse.helaOsuWedaGedara.enumiration.PaymentMethod;
-import lk.ijse.helaOsuWedaGedara.enumiration.PaymentStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Payment {
+public class MedicalRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long paymentId;
-    private BigDecimal amount;
-    private String transactionRef;
-
-    @Enumerated(EnumType.STRING)
-    private PaymentMethod paymentMethod;
-
-    @Enumerated(EnumType.STRING)
-    private PaymentStatus paymentStatus;
-
-    private LocalDateTime paidAt;
+    private Long medicalRecordId;
+    private String diagnosis;
+    private String clinicalNote;
+    private LocalDateTime createdAt;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "appointment_id", nullable = false, unique = true)
     private Appointment appointment;
+
 }
