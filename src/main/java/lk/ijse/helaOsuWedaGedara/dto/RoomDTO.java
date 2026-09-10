@@ -7,11 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthResponseDTO {
-    private String token;
-    private String tokenType;
-    private Long userId;
-    private String username;
-    private String role;
-
+public class RoomDTO {
+    private Long roomId;
+    private String roomNumber;
+    private String roomType;
 }
