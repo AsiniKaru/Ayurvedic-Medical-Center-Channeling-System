@@ -2,24 +2,24 @@ package lk.ijse.helaOsuWedaGedara.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DoctorDTO {
-    private Long docId;
+public class PatientDTO {
+    private Long patientId;
     private String firstName;
     private String lastName;
+    private LocalDate dob;
+    private String gender;
     private String phoneNumber;
-    private Double consultationFee;
-    private String bio;
     private Long userId;
-    private Long specializationId;
-    private String specializationName;
+    private String email;
 
-    public String getDoctorName() {
+    public String getPatientName() {
         return firstName  + " " + lastName;
     }
 }
