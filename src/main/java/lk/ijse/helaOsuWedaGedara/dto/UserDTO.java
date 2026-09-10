@@ -19,4 +19,7 @@ public class UserDTO {
     private UserRole role;
     private ActiveStatus status;
     private LocalDateTime createdAt;
+
+    private PatientDTO patientDTO;
+    private DoctorDTO doctorDTO;
 }
