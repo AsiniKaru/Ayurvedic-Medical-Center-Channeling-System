@@ -36,14 +36,18 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/v1/test/login").permitAll()
+                        .requestMatchers(
+                                "/api/v1/users/login",
+                                "/api/v1/users/saveUser",
+                                "/api/v1/patients/register",
+                                "/api/v1/auth/**"
+                        ).permitAll()
+
+                        // 2. All other requests require a valid JWT (MUST BE LAST)
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/users/login", "/api/v1/patients/register").permitAll()
-                        .anyRequest().authenticated()
-                )// Add this
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
