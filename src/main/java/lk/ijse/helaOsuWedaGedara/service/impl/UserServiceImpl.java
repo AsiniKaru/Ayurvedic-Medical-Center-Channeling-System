@@ -4,6 +4,7 @@ import lk.ijse.helaOsuWedaGedara.dto.AuthDTO;
 import lk.ijse.helaOsuWedaGedara.dto.UserDTO;
 import lk.ijse.helaOsuWedaGedara.entity.User;
 import lk.ijse.helaOsuWedaGedara.enumiration.ActiveStatus;
+import lk.ijse.helaOsuWedaGedara.enumiration.UserRole;
 import lk.ijse.helaOsuWedaGedara.repository.UserRepository;
 import lk.ijse.helaOsuWedaGedara.security.CustomUserDetailsService;
 import lk.ijse.helaOsuWedaGedara.security.JwtUtil;
@@ -12,10 +13,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,16 +31,46 @@ public class UserServiceImpl implements UserService {
     private final AuthenticationManager authenticationManager;
     private final CustomUserDetailsService userDetailsService;
     private final JwtUtil jwtUtil;
+    private final PasswordEncoder passwordEncoder; // <--- 2. Declare field
 
     public UserServiceImpl(UserRepository userRepository,
                            AuthenticationManager authenticationManager,
                            CustomUserDetailsService userDetailsService,
-                           JwtUtil jwtUtil) {
+                           JwtUtil jwtUtil,
+                           PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.authenticationManager = authenticationManager;
         this.userDetailsService = userDetailsService;
         this.jwtUtil = jwtUtil;
+        this.passwordEncoder = passwordEncoder;
+
     }
+    @Override
+    public UserDTO saveAdmin(UserDTO userDTO) {
+        if (userRepository.existsByUsername(userDTO.getUsername())) {
+            throw new RuntimeException("Username already exists!");
+        }
+        if (userRepository.existsByEmail(userDTO.getEmail())) {
+            throw new RuntimeException("Email already exists!");
+        }
+
+        User admin = new User();
+        admin.setUsername(userDTO.getUsername());
+        admin.setEmail(userDTO.getEmail());
+        admin.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        admin.setRole(UserRole.ADMIN);
+        admin.setActiveStatus(ActiveStatus.ACTIVE);
+        admin.setCreatedAt(LocalDateTime.now());
+
+        User saved = userRepository.save(admin);
+
+        userDTO.setUserId(saved.getUserId());
+        userDTO.setPassword(null);
+        userDTO.setRole(saved.getRole());
+        return userDTO;
+    }
+
+
     @Override
     public AuthDTO login(AuthDTO authDTO) {
         log.info("Execute User Login for username: {}", authDTO.getUsername());

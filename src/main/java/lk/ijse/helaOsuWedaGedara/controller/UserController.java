@@ -21,6 +21,12 @@ public class UserController {
         this.userService = userService;
     }
 
+    @PostMapping(value = "/saveAdmin", produces = MediaType.APPLICATION_JSON_VALUE)
+    public CommonResponse saveAdmin(@RequestBody UserDTO userDTO) {
+        UserDTO saved = userService.saveAdmin(userDTO);
+        return new CommonResponse(OPERATION_SUCCESS, saved, "Admin saved successfully!");
+    }
+
     @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
     public CommonResponse login(@RequestBody AuthDTO authDTO) {
         AuthDTO response = userService.login(authDTO);

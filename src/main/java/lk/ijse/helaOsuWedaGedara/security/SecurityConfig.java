@@ -1,5 +1,6 @@
 package lk.ijse.helaOsuWedaGedara.security;
 
+import lk.ijse.helaOsuWedaGedara.enumiration.UserRole;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,11 +36,12 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/v1/test/login").permitAll()
+//                        .requestMatchers(HttpMethod.POST, "api/v1/users/saveAdmin").hasRole(UserRole.ADMIN.name())
                         .requestMatchers(
                                 "/api/v1/users/login",
                                 "/api/v1/users/saveUser",
                                 "/api/v1/patients/register",
+                                "/api/v1/users/saveAdmin",
                                 "/api/v1/auth/**"
                         ).permitAll()
 
