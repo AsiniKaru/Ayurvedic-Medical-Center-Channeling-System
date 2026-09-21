@@ -88,7 +88,13 @@ public class DoctorServiceImpl  implements DoctorService {
         doctor.setConsultationFee(doctorDTO.getConsultationFee());
         doctor.setBio(doctorDTO.getBio());
 
-        doctorRepository.save(doctor);
+        Doctor savedDoctor = doctorRepository.save(doctor);
+
+        // Reflect the actual persisted specialization (id + name) back to the caller
+        // instead of just echoing whatever was sent in, so the frontend always shows
+        // the real, up-to-date specialization after an update.
+        doctorDTO.setSpecializationId(savedDoctor.getSpecialization().getSpecializationId());
+        doctorDTO.setSpecializationName(savedDoctor.getSpecialization().getSpecialization());
         return doctorDTO;
     }
 
@@ -99,7 +105,7 @@ public class DoctorServiceImpl  implements DoctorService {
 
         return new DoctorDTO(d.getDocId(), d.getFirstName(), d.getLastName(), d.getPhoneNumber(),
                 d.getConsultationFee(), d.getBio(), d.getUser().getUserId(),
-                d.getSpecialization().getSpecializationId(), d.getSpecialization().getDescription());
+                d.getSpecialization().getSpecializationId(), d.getSpecialization().getSpecialization());
     }
 
     @Override

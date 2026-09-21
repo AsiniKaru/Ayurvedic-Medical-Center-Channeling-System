@@ -19,6 +19,8 @@ public class DoctorDTO {
     private Long specializationId;
     private String specializationName;
 
+
+
     public String getDoctorName() {
         return firstName  + " " + lastName;
     }
