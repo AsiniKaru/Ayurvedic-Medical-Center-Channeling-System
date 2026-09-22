@@ -50,4 +50,12 @@ public class DoctorController {
         List<DoctorDTO> list = doctorService.getDoctorsBySpecialization(specId);
         return new CommonResponse(OPERATION_SUCCESS, list, SUCCESS_MESSAGE);
     }
+
+    @DeleteMapping(value = "/delete/{docId}" ,produces = MediaType.APPLICATION_JSON_VALUE)
+    public CommonResponse deleteDoctor(@PathVariable Long docId) {
+        String result = doctorService.deleteDoctor(docId);
+        return new CommonResponse(OPERATION_SUCCESS, result, SUCCESS_MESSAGE);
+    }
+
+
 }

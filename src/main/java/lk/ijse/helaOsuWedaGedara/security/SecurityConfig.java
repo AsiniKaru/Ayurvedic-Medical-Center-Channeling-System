@@ -42,8 +42,8 @@ public class SecurityConfig {
                                 "/api/v1/users/saveUser",
                                 "/api/v1/patients/register",
                                 "/api/v1/users/saveAdmin",
-                                "/api/v1/doctors/register",
-                                "/api/v1/specializations/save",
+                                "/api/v1/doctors/**",
+                                "/api/v1/specializations/**",
                                 "/api/v1/auth/**"
                         ).permitAll()
 

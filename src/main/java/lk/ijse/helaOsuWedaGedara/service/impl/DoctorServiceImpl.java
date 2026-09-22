@@ -136,4 +136,17 @@ public class DoctorServiceImpl  implements DoctorService {
         }
         return dtoList;
     }
+
+    @Override
+    public String deleteDoctor(Long docId) {
+        log.info("Execute Delete Specialization: {}", docId);
+        if (!doctorRepository.existsById(docId)) {
+            throw new RuntimeException("Doctor not found with ID: " + docId);
+        }
+        doctorRepository.deleteById(docId);
+        return "Doctor deleted successfully!";
+    }
+
+
+
 }

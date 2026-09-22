@@ -10,4 +10,5 @@ public interface DoctorService {
     DoctorDTO getDoctorById(Long docId);
     List<DoctorDTO> getAllDoctors();
     List<DoctorDTO> getDoctorsBySpecialization(Long specializationId);
+    String deleteDoctor(Long docId);
 }
